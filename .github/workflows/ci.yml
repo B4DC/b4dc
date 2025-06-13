@@ -23,11 +23,21 @@ jobs:
           curl -f http://localhost:5000/api/burger
           curl -f http://localhost:5000/api/hotdog
           docker stop test-backend
+          docker rm test-backend
 
   build-frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Build frontend Docker image
         run: docker build -t burger-frontend ./frontend
+
+      - name: Run frontend container
+        run: |
+          docker run -d -p 8080:80 --name test-frontend burger-frontend
+          sleep 5
+          curl -f http://localhost:8080
+          docker stop test-frontend
+          docker rm test-frontend
