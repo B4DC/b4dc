@@ -1,4 +1,4 @@
-function login() {
+function login() { 
   const username = document.getElementById('username').value.trim();
   if (!username) {
     alert('Please enter a username');
@@ -35,3 +35,13 @@ function goBack() {
   document.getElementById('username').value = '';
   document.getElementById('result').innerText = '';
 }
+
+// Enable Enter key to trigger login
+document.addEventListener('DOMContentLoaded', () => {
+  const usernameInput = document.getElementById('username');
+  usernameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      login();
+    }
+  });
+});
