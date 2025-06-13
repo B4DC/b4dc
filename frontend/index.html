@@ -5,20 +5,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
+  <div id="login-form">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username"><br>
+    <button onclick="login()">Login</button>
+  </div>
 
-    <div id="login-section">
-      <h2>Login</h2>
-      <input type="text" id="username" placeholder="Username">
-      <button onclick="login()">Login</button>
-    </div>
+  <p id="welcome" style="display:none;"></p>
 
-    <div id="menu-section" style="display:none;">
-      <h2 id="welcome-message"></h2>
-      <button onclick="fetchItem('burger')">Get Burger</button>
-      <button onclick="fetchItem('hotdog')">Get Hotdog</button>
-      <p id="result"></p>
-    </div>
+  <div id="menu" style="display:none;">
+    <!-- buttons and result here -->
+  </div>
+
+  <div id="menu-section" style="display:none;">
+    <h2 id="welcome-message"></h2>
+    <button onclick="fetchItem('burger')">Get Burger</button>
+    <button onclick="fetchItem('hotdog')">Get Hotdog</button>
+    <button onclick="backToLogin()">Back to Login</button>
+    <p id="result"></p>
+  </div>
 
   </div>
   <script src="script.js"></script>
