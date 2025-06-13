@@ -1,5 +1,6 @@
 function login() {
-  document.getElementById('menu').style.display = 'block';
+  document.getElementById('login-section').style.display = 'none';
+  document.getElementById('menu-section').style.display = 'block';
 }
 
 function fetchItem(item) {
