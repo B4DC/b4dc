@@ -44,3 +44,8 @@ button:hover {
   margin-top: 15px;
   font-weight: bold;
 }
+
+#welcome-message {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
