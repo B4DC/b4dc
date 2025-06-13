@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Burger & Hotdog App</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-
+    <!-- Login Form -->
     <div id="login-section">
       <h2>Login</h2>
-      <input type="text" id="username" placeholder="Username">
+      <input type="text" id="username" placeholder="Enter your username" />
       <button onclick="login()">Login</button>
     </div>
 
-    <div id="menu-section" style="display:none;">
+    <!-- Menu Section -->
+    <div id="menu-section" style="display: none;">
       <h2 id="welcome-message"></h2>
       <button onclick="fetchItem('burger')">Get Burger</button>
       <button onclick="fetchItem('hotdog')">Get Hotdog</button>
       <p id="result"></p>
+      <button onclick="goBack()">Back to Login</button>
     </div>
-
   </div>
+
   <script src="script.js"></script>
 </body>
-
 </html>
