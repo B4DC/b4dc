@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: burger-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: burger-frontend
+  template:
+    metadata:
+      labels:
+        app: burger-frontend
+    spec:
+      containers:
+      - name: burger-frontend
+        image: badchan/burger-frontend:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: burger-frontend-service
+spec:
+  type: NodePort
+  selector:
+    app: burger-frontend
+  ports:
+    - protocol: TCP
+      port: 80         # Cluster internal port
+      targetPort: 80   # Container port
+      nodePort: 30080  # External port on your node
