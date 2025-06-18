@@ -23,11 +23,10 @@ kind: Service
 metadata:
   name: burger-frontend-service
 spec:
-  type: NodePort
+  type: NodePort            # You can change to LoadBalancer if your k8s supports it
   selector:
     app: burger-frontend
   ports:
-  - protocol: TCP
-    port: 80          # service port
-    targetPort: 80    # container port
-    nodePort: 30080   # external access port on the node
+  - port: 80
+    targetPort: 80
+    nodePort: 30080        # fixed port for access via node IP and this port

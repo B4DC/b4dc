@@ -27,6 +27,5 @@ spec:
   selector:
     app: burger-backend
   ports:
-  - protocol: TCP
-    port: 5000          # service port
-    targetPort: 5000    # container port
+  - port: 5000
+    targetPort: 5000
