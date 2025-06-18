@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: burger-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: burger-frontend
+  template:
+    metadata:
+      labels:
+        app: burger-frontend
+    spec:
+      containers:
+      - name: burger-frontend
+        image: badchan/burger-frontend:latest
+        ports:
+        - containerPort: 80

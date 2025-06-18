@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: burger-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: burger-backend
+  template:
+    metadata:
+      labels:
+        app: burger-backend
+    spec:
+      containers:
+        - name: burger-backend
+          image: badchan/burger-backend:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: burger-backend-service
+spec:
+  selector:
+    app: burger-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
