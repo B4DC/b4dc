@@ -14,7 +14,7 @@ function login() {
 }
 
 function fetchItem(item) {
-  fetch(`http://localhost:5000/api/${item}`)
+  fetch(`/api/${item}`)  // ✅ Fixed: relative path for reverse proxy
     .then(response => {
       if (!response.ok) throw new Error(`API error: ${response.status}`);
       return response.json();
