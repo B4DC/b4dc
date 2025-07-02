@@ -1,5 +1,4 @@
-const BACKEND_URL = 'http://127.0.0.1:56233';  // Change port if yours is different
-
+// Use relative API paths so requests go through Ingress
 function login() { 
   const username = document.getElementById('username').value.trim();
   if (!username) {
@@ -16,7 +15,7 @@ function login() {
 }
 
 function fetchItem(item) {
-  fetch(`${BACKEND_URL}/api/${item}`)  // full backend URL with port
+  fetch(`/api/${item}`) // Use relative path for API call
     .then(response => {
       if (!response.ok) throw new Error(`API error: ${response.status}`);
       return response.json();
