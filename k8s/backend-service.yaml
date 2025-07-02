@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: burger-backend-service
 spec:
+  type: NodePort            # change from ClusterIP to NodePort
   selector:
     app: burger-backend
   ports:
-    - protocol: TCP
-      port: 5000
+    - port: 5000
       targetPort: 5000
-  type: ClusterIP
+      nodePort: 30500      # choose an available port (30000-32767)
