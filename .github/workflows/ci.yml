@@ -1,4 +1,4 @@
-name: CI Build and Test Frontend + Backend
+name: CI - Build & Test Burger Frontend + Backend
 
 on:
   push:
@@ -12,26 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js for frontend
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18' # your frontend node version
-
-      - name: Install frontend dependencies and build
-        working-directory: ./frontend
-        run: |
-          npm install
-          npm run build
-
       - name: Build frontend Docker image
-        run: docker build -t burger-frontend ./frontend
+        run: docker build -t badchan/burger-frontend ./frontend
 
       - name: Run and test frontend container
         run: |
-          docker run -d -p 8080:80 --name test-frontend burger-frontend
+          docker run -d -p 8080:80 --name test-frontend badchan/burger-frontend
           sleep 5
           curl -f http://localhost:8080
           docker stop test-frontend
@@ -42,26 +31,15 @@ jobs:
     needs: build-frontend
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Python environment for backend
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10' # your backend python version
-
-      - name: Install backend dependencies
-        working-directory: ./backend
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
       - name: Build backend Docker image
-        run: docker build -t burger-backend ./backend
+        run: docker build -t badchan/burger-backend ./backend
 
       - name: Run and test backend container
         run: |
-          docker run -d -p 5000:5000 --name test-backend burger-backend
+          docker run -d -p 5000:5000 --name test-backend badchan/burger-backend
           sleep 5
           curl -f http://localhost:5000/api/burger
           docker stop test-backend
