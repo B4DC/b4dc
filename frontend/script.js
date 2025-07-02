@@ -1,3 +1,5 @@
+const BACKEND_URL = 'http://127.0.0.1:64622';  // Change port if yours is different
+
 function login() { 
   const username = document.getElementById('username').value.trim();
   if (!username) {
@@ -14,7 +16,7 @@ function login() {
 }
 
 function fetchItem(item) {
-  fetch(`/api/${item}`)  // ✅ Fixed: relative path for reverse proxy
+  fetch(`${BACKEND_URL}/api/${item}`)  // full backend URL with port
     .then(response => {
       if (!response.ok) throw new Error(`API error: ${response.status}`);
       return response.json();
