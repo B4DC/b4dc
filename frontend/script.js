@@ -1,4 +1,4 @@
-// Use relative API paths so requests go through Ingress
+// Use full backend hostname for API calls
 function login() { 
   const username = document.getElementById('username').value.trim();
   if (!username) {
@@ -15,7 +15,7 @@ function login() {
 }
 
 function fetchItem(item) {
-  fetch(`/api/${item}`) // Use relative path for API call
+  fetch(`http://api.burger.local:8080/api/${item}`) // Absolute URL with backend host
     .then(response => {
       if (!response.ok) throw new Error(`API error: ${response.status}`);
       return response.json();
