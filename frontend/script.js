@@ -15,7 +15,7 @@ function login() {
 }
 
 function fetchItem(item) {
-  fetch(`/api/${item}`) // Use relative path for API call
+  fetch(`http://burger.local/api/${item}`) // Use relative path for API call
     .then(response => {
       if (!response.ok) throw new Error(`API error: ${response.status}`);
       return response.json();
