@@ -6,7 +6,7 @@ CORS(app)  # <-- this enables CORS for all routes
 
 @app.route('/api/burger')
 def get_burger():
-    return jsonify({"item": "burger", "price": 5.99})
+    return jsonify({"item": "burger", "price": 6.99})
 
 @app.route('/api/hotdog')
 def get_hotdog():
