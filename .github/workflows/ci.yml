@@ -6,6 +6,7 @@ on:
       - 'frontend/**'
       - 'backend/**'
       - '.github/workflows/**'
+      - 'k8s/**'
 
 jobs:
   build-frontend:
