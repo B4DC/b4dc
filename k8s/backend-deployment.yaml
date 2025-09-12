@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: burger-backend
-        image: badchan/burger-backend:latest
+        image: badchan/burger-backend:v2
         ports:
         - containerPort: 5000
 ---
