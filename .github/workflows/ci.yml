@@ -1,4 +1,4 @@
-name: CI - Build & Test Burger Frontend + Backend
+name: CI - Build, Test & SonarQube Analysis
 
 on:
   push:
@@ -45,3 +45,24 @@ jobs:
           curl -f http://localhost:5000/api/burger
           docker stop test-backend
           docker rm test-backend
+
+  sonar-analysis:
+    runs-on: self-hosted
+    needs: [build-frontend, build-backend]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run SonarQube scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Optional: fail CI if Quality Gate fails
+      # - uses: SonarSource/sonarqube-quality-gate-action@v1
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
