@@ -1,7 +1,9 @@
-name: CI - Build & Test Burger Frontend + Backend
+name: CI - Build, Test & SonarQube
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'frontend/**'
       - 'backend/**'
@@ -10,11 +12,13 @@ on:
 
 jobs:
   build-frontend:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for sonar
 
       - name: Build frontend Docker image
         run: docker build -t badchan/burger-frontend ./frontend
@@ -33,7 +37,9 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build backend Docker image
         run: docker build -t badchan/burger-backend ./backend
@@ -45,3 +51,19 @@ jobs:
           curl -f http://localhost:5000/api/burger
           docker stop test-backend
           docker rm test-backend
+
+  sonar-analysis:
+    runs-on: ubuntu-latest
+    needs: [build-frontend, build-backend]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run SonarQube scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
